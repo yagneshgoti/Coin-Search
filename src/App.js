@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Routes, Route, json } from "react-router-dom";
+import Coins from "./components/Coins";
+import Coin from "./routes/Coin";
+import Navbar from "./components/Navbar";
+import CryptoContext, { CryptoState } from "./CryptoContext";
+import Home from "./components/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CryptoContext>
+      <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/coins" element={<Coins />} />
+          <Route path="/coin" element={<Coin />}>
+            <Route path=":coinId" element={<Coin />} />
+          </Route>
+        </Routes>
+      </CryptoContext>
+    </>
   );
 }
 

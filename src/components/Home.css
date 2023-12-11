@@ -1,0 +1,25 @@
+.bannerContainer {
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  font-size: 20px;
+}
+.bannerText {
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  font-size: 12px;
+}
+.button {
+  background: none;
+border: none;
+text-decoration: none;
+}
+button:hover {
+ background-color: #6900ff;
+}
+p , button {
+font-size: 15px;
+}
