@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CoinItem from "./CoinItem";
-import Coin from "../routes/Coin";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Coins.css";
 import { CryptoState } from "../CryptoContext";
+import Coin from "../routes/Coin";
+import CoinItem from "./CoinItem";
+import "./Coins.css";
 
 const Coins = () => {
   const [coins, setCoins] = useState([]);
@@ -13,9 +13,8 @@ const Coins = () => {
   let config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: `https://coinranking1.p.rapidapi.com/coins?timePeriod=24h&referenceCurrencyUuid=${
-      currency == "INR" ? "6mUvpzCc2lFo" : "yhjMzLPhuIDl"
-    }`,
+    url: `https://coinranking1.p.rapidapi.com/coins?timePeriod=24h&referenceCurrencyUuid=${currency === "INR" ? "6mUvpzCc2lFo" : "yhjMzLPhuIDl"
+      }`,
     headers: {
       "X-RapidAPI-Key": "dda6075c55mshad4c206e3fa84ddp120d85jsnd4f21c836c91",
       "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
@@ -31,7 +30,6 @@ const Coins = () => {
           console.log(coins);
           setCoins(coins);
         }
-        // console.log(response.data[0])
       })
       .catch((error) => {
         console.log(error);

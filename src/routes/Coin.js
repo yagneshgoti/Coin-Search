@@ -1,24 +1,23 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
-import { Line } from "react-chartjs-2";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import "./Coin.css";
 import { CryptoState } from "../CryptoContext";
+import { formatNumber } from "../components/Home";
+import "./Coin.css";
 
 const Coin = () => {
   const { coinId } = useParams();
   const [coin, setCoin] = useState({});
 
-  const { currency } = CryptoState();
+  const { currency, symbol } = CryptoState();
 
   let config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: `https://coinranking1.p.rapidapi.com/coin/${coinId}?referenceCurrencyUuid=${
-      currency == "INR" ? "6mUvpzCc2lFo" : "yhjMzLPhuIDl"
-    }`,
+    url: `https://coinranking1.p.rapidapi.com/coin/${coinId}?referenceCurrencyUuid=${currency === "INR" ? "6mUvpzCc2lFo" : "yhjMzLPhuIDl"
+      }`,
     headers: {
       "X-RapidAPI-Key": "dda6075c55mshad4c206e3fa84ddp120d85jsnd4f21c836c91",
       "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
@@ -62,8 +61,7 @@ const Coin = () => {
             <div className="coin-price">
               {coin.price ? (
                 <h1>
-                  {currency == "INR" ? "₹" : "$"}
-                  {Number(coin.price).toFixed(2)}
+                  {symbol} {formatNumber(Number(coin.price))}
                 </h1>
               ) : null}
             </div>
@@ -152,13 +150,13 @@ const Coin = () => {
               <div className="row">
                 <h4>24 Hour Low</h4>
                 {coin.market_data?.low_24h ? (
-                  <p>${coin.market_data.low_24h.usd.toLocaleString()}</p>
+                  <p>{symbol}{coin.market_data.low_24h.usd.toLocaleString()}</p>
                 ) : null}
               </div>
               <div className="row">
                 <h4>24 Hour High</h4>
                 {coin.market_data?.high_24h ? (
-                  <p>${coin.market_data.high_24h.usd.toLocaleString()}</p>
+                  <p>{symbol} {coin.market_data.high_24h.usd.toLocaleString()}</p>
                 ) : null}{" "}
               </div>
             </div>
@@ -167,8 +165,8 @@ const Coin = () => {
                 <h4>Market Cap</h4>
                 {coin?.marketCap ? (
                   <p>
-                    {currency == "INR" ? "₹" : "$"}
-                    {Number(coin.marketCap).toFixed(2)}
+                    {symbol}
+                    {formatNumber(Number(coin.marketCap))}
                   </p>
                 ) : null}
               </div>

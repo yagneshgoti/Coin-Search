@@ -5,6 +5,7 @@
   flex-direction: row;
   font-size: 20px;
 }
+
 .bannerText {
   text-align: center;
   align-items: center;
@@ -12,14 +13,102 @@
   flex-direction: row;
   font-size: 12px;
 }
-.button {
-  background: none;
-border: none;
-text-decoration: none;
+
+.buttonContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
+
+button {
+  padding: 15px 40px 15px 40px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #6900ff;
+  color: #6900ff;
+  background-color: white;
+  font-size: 15px;
+  font-weight: bold;
+  width: 20%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  align-self: center;
+}
+
 button:hover {
- background-color: #6900ff;
+  background-color: #6900ff;
+  color: white;
+  border-color: white;
 }
-p , button {
-font-size: 15px;
+
+.coinContainer {
+  border-color: white;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #6900ff;
+  border-radius: 12px;
+  width: 45%;
+  padding: 10px;
+  background-color: white;
+  color: #6900ff;
+  margin-top: 20px;
+  align-self: center;
+}
+
+.rank {
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 6px 2px 6px;
+  margin-right: 20px;
+  vertical-align: middle;
+  font-size: 1rem;
+}
+
+.coinName {
+  font-weight: bold;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.coinIcon {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.rankingContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+th:nth-child(odd),
+td:nth-child(odd) {
+  color: gray;
+  text-align: left;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.coinSymbol {
+  color: gray;
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+.price {
+  color: black;
+}
+
+.change {
+  color: black;
+}
+
+.volume {
+  color: black;
+}
+
+.marketcap {
+  color: black;
 }

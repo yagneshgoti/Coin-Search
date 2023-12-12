@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { FaCoins, FaSearch } from "react-icons/fa";
+import { FaCoins } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
 import { CryptoState } from "../CryptoContext";
+import "./Navbar.css";
 
 const Navbar = () => {
   const { setCurrency } = CryptoState();
 
-  const [isToggled, setToggle] = useState(true);
+  const [isToggled, setToggle] = useState(false);
 
   const callback = () => {
     setToggle(!isToggled);
@@ -26,10 +26,14 @@ const Navbar = () => {
         </div>
       </Link>
 
-      <label class="switch">
-        <input type="checkbox" defaultChecked={isToggled} onClick={callback} />
-        <span class="slider round"></span>
-      </label>
+      <div className="radioButtonSwitchContainer">
+        <h3 className="label">{'₹'}</h3>
+        <label class="switch">
+          <input type="checkbox" defaultChecked={isToggled} onClick={callback} />
+          <span class="slider round"></span>
+        </label>
+        <h3 className="label">{'$'}</h3>
+      </div>
     </div>
   );
 };
