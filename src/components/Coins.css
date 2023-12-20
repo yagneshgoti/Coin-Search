@@ -16,7 +16,7 @@
 }
 
 .coin-name {
-    margin-left: -4rem;
+    margin-left: 2.5rem;
 }
 
 .coin-row {
@@ -53,4 +53,33 @@ img {
     .hide-mobile {
         display: none;
     }
+}
+
+.coinImage{
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.input-box{
+    border-style: solid;
+    border-radius: 8px;
+    border-color: #6900ff;
+    padding: 10px 20px 10px 20px;
+    font-size: 20px;
+    color: #6900ff;
+
+}
+
+th:nth-child(odd),
+td:nth-child(odd) {
+  color: white;
+  text-align: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.viewmore-icon {
+    width: 25px;
+    height: 25px;
 }

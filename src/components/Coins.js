@@ -5,10 +5,12 @@ import { CryptoState } from "../CryptoContext";
 import Coin from "../routes/Coin";
 import CoinItem from "./CoinItem";
 import "./Coins.css";
+import viewmore_icon from './../assets/viewmore_icon.png'
 
 const Coins = () => {
   const [coins, setCoins] = useState([]);
-  const { currency } = CryptoState();
+  const [search, setSearch] = useState("");
+  const { currency, symbol } = CryptoState();
 
   let config = {
     method: "get",
@@ -38,24 +40,59 @@ const Coins = () => {
 
   return (
     <div className="container">
-      <div>
-        <div className="heading">
-          <p>#</p>
-          <p className="coin-name">Coin</p>
-          <p style={{ textAlign: "center" }}>Price</p>
-          <p>% Change</p>
-          <p className="hide-mobile">24h Volume</p>
-          <p className="hide-mobile">Mkt Cap</p>
-        </div>
-
-        {coins.map((coins) => {
+      <input
+        type="text"
+        placeholder="Search coin..."
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+        className="input-box"
+      />
+      <table>
+        <thead>
+          <tr>
+            <td>Rank</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Change</td>
+            <td>24h Volume</td>
+            <td>Market Cap</td>
+            <td></td>
+          </tr>
+        </thead>
+        {coins.filter((item) => {
+          return item.name.toLowerCase().includes(search.toLowerCase());
+        }).map((item) => {
           return (
-            <Link to={`/coin/${coins.uuid}`} element={<Coin />} key={coins.id}>
-              <CoinItem coins={coins} />
-            </Link>
+            <tr>
+              <td >{item.rank}</td>
+              <td>
+                <a href={item.coinrankingUrl}>
+                  <img src={item.iconUrl} alt="logo" width="30px" />
+                </a>
+                <p>{item.name}</p>
+              </td>
+              <td>
+                {symbol}
+                {Number(item.price).toFixed(2)}
+              </td>
+              <td style={{
+                color: item.change > 0 ? "green" : 'red'
+              }}>{item.change}%</td>
+              <td className="symbol">{symbol}
+                {Number(item["24hVolume"])}</td>
+              <td>{symbol}
+                {Number(item.marketCap).toFixed(2)}</td>
+              <td>
+
+                <Link style={{ width: 0 }} to={`/coin/${item.uuid}`} element={<Coin />} key={item.id}>
+                  <img className="viewmore-icon" src={viewmore_icon} alt="view more" />
+                </Link>
+              </td>
+            </tr>
           );
         })}
-      </div>
+      </table>
     </div>
   );
 };

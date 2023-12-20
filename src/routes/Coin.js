@@ -1,11 +1,12 @@
 import axios from "axios";
 import DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 
 import { CryptoState } from "../CryptoContext";
 import { formatNumber } from "../components/Home";
 import "./Coin.css";
+import SparklineChart from "../components/SparklineChart";
 
 const Coin = () => {
   const { coinId } = useParams();
@@ -46,7 +47,7 @@ const Coin = () => {
         </div>
         <div className="content">
           <div className="rank">
-            <span className="rank-btn">Rank # {coin.rank}</span>
+            <span className="rank-btn" style={{ background: coin.color }}>Rank # {coin.rank}</span>
           </div>
           <div className="info">
             <div className="coin-heading">
@@ -67,82 +68,8 @@ const Coin = () => {
             </div>
           </div>
         </div>
-
-        <div className="content">
-          {/* <table>
-            <thead>
-              <tr>
-                {["1h", "24h", "7d", "14d", "30d", "1yr"].map((item, index) => (
-                  <th>{item}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  {coin.market_data?.price_change_percentage_1h_in_currency ? (
-                    <p>
-                      {coin.market_data.price_change_percentage_1h_in_currency.usd.toFixed(
-                        1
-                      )}
-                      %
-                    </p>
-                  ) : null}
-                </td>
-                <td>
-                  {coin.market_data?.price_change_percentage_24h_in_currency ? (
-                    <p>
-                      {coin.market_data.price_change_percentage_24h_in_currency.usd.toFixed(
-                        1
-                      )}
-                      %
-                    </p>
-                  ) : null}
-                </td>
-                <td>
-                  {coin.market_data?.price_change_percentage_24h_in_currency ? (
-                    <p>
-                      {coin.market_data.price_change_percentage_7d_in_currency.usd.toFixed(
-                        1
-                      )}
-                      %
-                    </p>
-                  ) : null}
-                </td>
-                <td>
-                  {coin.market_data?.price_change_percentage_24h_in_currency ? (
-                    <p>
-                      {coin.market_data.price_change_percentage_14d_in_currency.usd.toFixed(
-                        1
-                      )}
-                      %
-                    </p>
-                  ) : null}
-                </td>
-                <td>
-                  {coin.market_data?.price_change_percentage_24h_in_currency ? (
-                    <p>
-                      {coin.market_data.price_change_percentage_30d_in_currency.usd.toFixed(
-                        1
-                      )}
-                      %
-                    </p>
-                  ) : null}
-                </td>
-                <td>
-                  {coin.market_data?.price_change_percentage_24h_in_currency ? (
-                    <p>
-                      {coin.market_data.price_change_percentage_1y_in_currency.usd.toFixed(
-                        1
-                      )}
-                      %
-                    </p>
-                  ) : null}
-                </td>
-              </tr>
-            </tbody>
-          </table> */}
-          {/* <Line data={data} /> */}
+        <div className="graph-container">
+          <SparklineChart data={coin.sparkline ? coin.sparkline : []} color={coin.color ? coin.color : "white"} />
         </div>
         <div className="content">
           <div className="stats">
